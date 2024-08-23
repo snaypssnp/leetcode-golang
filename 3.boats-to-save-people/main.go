@@ -14,7 +14,7 @@ func main() {
 	fmt.Println(output)
 }
 
-// O(n) solution
+// O(n lon n) solution
 func numRescueBoats(people []int, limit int) int {
 	sort.Ints(people)
 
