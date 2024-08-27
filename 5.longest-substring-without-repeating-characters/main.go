@@ -2,11 +2,15 @@ package main
 
 import "fmt"
 
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
 func main() {
-	fmt.Println(lengthOfLongestSubstring("abba"))
+	fmt.Println(lengthOfLongestSubstring1("abba"))
+
+	fmt.Println(lengthOfLongestSubstring2("abba"))
 }
 
-func lengthOfLongestSubstring(s string) int {
+// Time: O(N), Space O(N)
+func lengthOfLongestSubstring1(s string) int {
 	charMap := make(map[uint8]int)
 	maxLength := 0
 
@@ -18,6 +22,8 @@ func lengthOfLongestSubstring(s string) int {
 
 		if _, ok := charMap[char]; ok {
 			maxLength = max(maxLength, i-j)
+
+			fmt.Println(i - j)
 			j = max(charMap[char]+1, j)
 		}
 
@@ -25,4 +31,29 @@ func lengthOfLongestSubstring(s string) int {
 	}
 
 	return max(maxLength, i-j)
+}
+
+/*
+Brute force solution
+Time: O(N^2), Space O(N)
+*/
+func lengthOfLongestSubstring2(s string) int {
+	maxLength := 0
+	for i, _ := range s {
+		charMap := make(map[uint8]bool)
+		currencyLength := 0
+		for j := i; j < len(s); j++ {
+			var char = s[j]
+
+			if _, ok := charMap[char]; ok {
+				break
+			}
+			currencyLength++
+			charMap[char] = true
+
+		}
+
+		maxLength = max(maxLength, currencyLength)
+	}
+	return maxLength
 }
