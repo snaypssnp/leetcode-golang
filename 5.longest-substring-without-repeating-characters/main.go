@@ -23,7 +23,6 @@ func lengthOfLongestSubstring1(s string) int {
 		if _, ok := charMap[char]; ok {
 			maxLength = max(maxLength, i-j)
 
-			fmt.Println(i - j)
 			j = max(charMap[char]+1, j)
 		}
 
