@@ -22,11 +22,7 @@ func firstBadVersion(n int) int {
 	for l < r {
 		mid := (r + l) / 2
 		if isBadVersion(mid) {
-			if isBadVersion(mid-1) == false {
-				return mid
-			}
-
-			r = mid - 1
+			r = mid
 		} else {
 			l = mid + 1
 		}
