@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // https://leetcode.com/problems/first-bad-version/description/
 func main() {
