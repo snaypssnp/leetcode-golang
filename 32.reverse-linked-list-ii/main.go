@@ -1,7 +1,7 @@
 package main
 
 // https://leetcode.com/problems/reverse-linked-list-ii/
-func reverseBetween(head *ListNode, left int, right int) *ListNode {
+func reverseBetween1(head *ListNode, left int, right int) *ListNode {
 	dummy1, dummy2 := &ListNode{}, &ListNode{}
 
 	leftLL, rightLL := dummy1, dummy2
@@ -43,6 +43,34 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	}
 
 	return dummy1.Next
+}
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func reverseBetween2(head *ListNode, left int, right int) *ListNode {
+	dummy := &ListNode{Next: head}
+
+	prev := dummy
+
+	for i := 1; i < left; i++ {
+		prev = prev.Next
+	}
+
+	curr := prev.Next
+
+	for i := 0; i < right-left; i++ {
+		temp := curr.Next
+		curr.Next = temp.Next
+		temp.Next = prev.Next
+		prev.Next = temp
+	}
+
+	return dummy.Next
 }
 
 type ListNode struct {
