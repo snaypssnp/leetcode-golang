@@ -2,6 +2,10 @@ package main
 
 import "math"
 
+func main() {
+	math.Pow()
+}
+
 // https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
 func getDecimalValue(head *ListNode) int {
 	var i float64
