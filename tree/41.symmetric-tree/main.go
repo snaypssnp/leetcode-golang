@@ -1,7 +1,7 @@
 package main
 
 // https://leetcode.com/problems/symmetric-tree/
-func isSymmetric(root *TreeNode) bool {
+func isSymmetric1(root *TreeNode) bool {
 	queue := []*TreeNode{}
 
 	if root == nil {
@@ -30,12 +30,29 @@ func isSymmetric(root *TreeNode) bool {
 	return true
 }
 
+// dfs solution (it's not my)
 func getVal(node *TreeNode) int {
 	if node == nil {
 		return 1000
 	}
 
 	return node.Val
+}
+
+func isSymmetric2(root *TreeNode) bool {
+	return dfs(root.Left, root.Right)
+}
+
+func dfs(node1 *TreeNode, node2 *TreeNode) bool {
+	if node1 == nil && node2 == nil {
+		return true
+	}
+
+	if node1 == nil || node2 == nil || node1.Val != node2.Val {
+		return false
+	}
+
+	return dfs(node1.Left, node2.Right) && dfs(node1.Right, node2.Left)
 }
 
 type TreeNode struct {
