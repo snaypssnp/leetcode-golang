@@ -1,6 +1,6 @@
 package main
 
-// https://leetcode.com/problems/symmetric-tree/
+// https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 func kthSmallest(root *TreeNode, k int) int {
 	var result = traverse(root, []int{})
 
