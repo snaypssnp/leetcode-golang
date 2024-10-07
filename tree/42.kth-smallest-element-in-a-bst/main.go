@@ -18,7 +18,7 @@ func traverse(node *TreeNode, result []int) []int {
 	return result
 }
 
-// without recursion
+// without recursion (it's not my solution)
 func kthSmallest2(root *TreeNode, k int) int {
 	var stack []*TreeNode
 
