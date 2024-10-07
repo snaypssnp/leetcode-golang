@@ -1,11 +1,5 @@
 package main
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 // https://leetcode.com/problems/symmetric-tree/
 func isSymmetric(root *TreeNode) bool {
 	queue := []*TreeNode{}
@@ -42,4 +36,10 @@ func getVal(node *TreeNode) int {
 	}
 
 	return node.Val
+}
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
