@@ -61,8 +61,40 @@ func maxDepth3(root *TreeNode) int {
 	return 1 + max(maxDepth3(root.Left), maxDepth3(root.Right))
 }
 
+// it's not my solution (iterative dfa)
+func maxDepth4(root *TreeNode) (res int) {
+	if root == nil {
+		return
+	}
+
+	stack := []StackDepthNode{{depth: 1, node: root}}
+
+	for len(stack) > 0 {
+		n := len(stack) - 1
+		stackDepth := stack[n]
+		stack = stack[:n]
+
+		res = max(res, stackDepth.depth)
+
+		if stackDepth.node.Left != nil {
+			stack = append(stack, StackDepthNode{stackDepth.node.Left, stackDepth.depth + 1})
+		}
+
+		if stackDepth.node.Right != nil {
+			stack = append(stack, StackDepthNode{stackDepth.node.Right, stackDepth.depth + 1})
+		}
+	}
+
+	return
+}
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
+}
+
+type StackDepthNode struct {
+	node  *TreeNode
+	depth int
 }
