@@ -52,6 +52,15 @@ func maxDepth2(root *TreeNode) (max int) {
 	return
 }
 
+// it's not my dfs solution
+func maxDepth3(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	return 1 + max(maxDepth3(root.Left), maxDepth3(root.Right))
+}
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
