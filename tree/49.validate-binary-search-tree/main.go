@@ -1,7 +1,7 @@
 package main
 
 // dfs solution
-func isValidBST(root *TreeNode) bool {
+func isValidBST1(root *TreeNode) bool {
 	var prev *int
 
 	var dfs func(node *TreeNode) bool
@@ -29,6 +29,35 @@ func isValidBST(root *TreeNode) bool {
 	}
 
 	return dfs(root)
+}
+
+// bfs solution
+func isValidBST2(node *TreeNode) bool {
+	var prev *int
+	var stack []*TreeNode
+
+	for node != nil || len(stack) > 0 {
+		if node != nil {
+			stack = append(stack, node)
+			node = node.Left
+		} else {
+			var n = len(stack) - 1
+
+			node = stack[n]
+			stack = stack[:n]
+
+			if prev != nil && *prev >= node.Val {
+				return false
+			}
+
+			prev = &node.Val
+
+			node = node.Right
+		}
+	}
+
+	return true
+
 }
 
 type TreeNode struct {
