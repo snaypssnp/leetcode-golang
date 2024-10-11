@@ -1,7 +1,7 @@
 package main
 
 // https://leetcode.com/problems/subtree-of-another-tree/description/
-func isSubtree(root *TreeNode, subRoot *TreeNode) bool {
+func isSubtree1(root *TreeNode, subRoot *TreeNode) bool {
 	queue := []*TreeNode{root}
 	var node *TreeNode
 
@@ -23,6 +23,18 @@ func isSubtree(root *TreeNode, subRoot *TreeNode) bool {
 	}
 
 	return false
+}
+
+func isSubtree2(root *TreeNode, subRoot *TreeNode) bool {
+	if root == nil {
+		return subRoot == nil
+	}
+
+	if dfs(root, subRoot) {
+		return true
+	}
+
+	return isSubtree2(root.Left, subRoot) || isSubtree2(root.Right, subRoot)
 }
 
 func dfs(node *TreeNode, subNode *TreeNode) bool {
