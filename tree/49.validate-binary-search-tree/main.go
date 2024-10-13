@@ -21,11 +21,7 @@ func isValidBST1(root *TreeNode) bool {
 
 		prev = &node.Val
 
-		if dfs(node.Right) == false {
-			return false
-		}
-
-		return true
+		return dfs(node.Right)
 	}
 
 	return dfs(root)

@@ -18,7 +18,7 @@ func goodNodes(root *TreeNode) (count int) {
 
 	}
 
-	dfs(root, -100000)
+	dfs(root, root.Val)
 
 	return count
 }
