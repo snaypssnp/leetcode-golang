@@ -1,5 +1,6 @@
 package main
 
+// https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	node := root
 
