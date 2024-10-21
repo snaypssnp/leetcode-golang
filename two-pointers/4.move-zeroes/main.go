@@ -59,3 +59,18 @@ func moveZeroes3(nums []int) {
 		}
 	}
 }
+
+// two pointers
+func moveZeroes4(nums []int) {
+	for i, j := 0, 0; j < len(nums); j++ {
+		if nums[i] == 0 {
+			if nums[j] == 0 {
+				continue
+			}
+
+			nums[i], nums[j] = nums[j], nums[i]
+		}
+
+		i++
+	}
+}
