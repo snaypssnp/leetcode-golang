@@ -18,16 +18,16 @@ func sortColors1(nums []int) {
 
 // O(N)
 func sortColors2(nums []int) {
-	start, current, end := -1, 0, len(nums)
+	start, current, end := 0, 0, len(nums)-1
 
-	for current < end {
+	for current <= end {
 		if nums[current] == 0 {
-			start++
 			nums[start], nums[current] = nums[current], nums[start]
 			current++
+			start++
 		} else if nums[current] == 2 {
-			end--
 			nums[end], nums[current] = nums[current], nums[end]
+			end--
 		} else {
 			current++
 		}
