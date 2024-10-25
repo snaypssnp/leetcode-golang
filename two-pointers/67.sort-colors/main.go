@@ -1,6 +1,6 @@
 package main
 
-// https://leetcode.com/problems/sort-colors/
+// https://leetcode.com/problems/sort-colors/ O(3N) -> O(N)
 func sortColors1(nums []int) {
 	var i int
 
@@ -16,7 +16,8 @@ func sortColors1(nums []int) {
 	}
 }
 
-func sortColors(nums []int) {
+// O(N)
+func sortColors2(nums []int) {
 	start, current, end := -1, 0, len(nums)
 
 	for current < end {
