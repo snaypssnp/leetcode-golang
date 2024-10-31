@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 )
 
 type BstNode struct {
@@ -196,14 +198,85 @@ func (b *BST) DFSPostOrder() []int {
 func main() {
 	var tree = &BST{}
 
-	tree.Insert(47)
-	tree.Insert(21)
-	tree.Insert(76)
-	tree.Insert(18)
-	tree.Insert(27)
-	tree.Insert(52)
-	tree.Insert(82)
+	tree.Insert(5)
+	tree.Insert(3)
+	tree.Insert(9)
+	tree.Insert(8)
+	//tree.Insert(6)
+	//tree.Insert(9)
+	//tree.Insert(10)
 
-	fmt.Printf("%#v\n", tree.Search(27))
-	fmt.Println(tree.DFSPostOrder())
+	//fmt.Printf("%#v\n", tree.Search(27))
+	//fmt.Println(tree.DFSPostOrder())
+
+	ser := Constructor()
+	deser := Constructor()
+	data := ser.serialize(tree.root)
+
+	fmt.Println(data)
+	ans := deser.deserialize(data)
+
+	//fmt.Println(ans)
+
+	var tree2 = &BST{root: ans}
+
+	fmt.Println(tree2.DFSPreOrder())
+}
+
+type Codec struct {
+}
+
+func Constructor() Codec {
+	return Codec{}
+}
+
+func (this *Codec) serialize(root *BstNode) string {
+	ans := []string{}
+
+	var dfs func(node *BstNode)
+
+	dfs = func(node *BstNode) {
+		if node == nil {
+			ans = append(ans, "#")
+
+			return
+		}
+
+		ans = append(ans, strconv.Itoa(node.Val))
+
+		dfs(node.left)
+		dfs(node.right)
+	}
+
+	dfs(root)
+
+	return strings.Join(ans, ",")
+}
+
+func (this *Codec) deserialize(data string) *BstNode {
+	queue := strings.Split(data, ",")
+
+	if len(queue) == 0 {
+		return nil
+	}
+
+	var dfs func() *BstNode
+
+	dfs = func() *BstNode {
+		num, err := strconv.Atoi(queue[0])
+		queue = queue[1:]
+
+		if err != nil {
+			return nil
+		}
+
+		node := &BstNode{Val: num}
+
+		node.left = dfs()
+		node.right = dfs()
+
+		return node
+	}
+
+	return dfs()
 }
