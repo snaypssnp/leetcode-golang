@@ -1,7 +1,7 @@
 package main
 
 // https://leetcode.com/problems/find-all-anagrams-in-a-string/
-func findAnagrams(s string, p string) (res []int) {
+func findAnagrams1(s string, p string) (res []int) {
 	if len(p) > len(s) {
 		return
 	}
@@ -41,6 +41,36 @@ core:
 		}
 
 		res = append(res, start)
+	}
+
+	return
+}
+
+func findAnagrams2(s string, p string) (res []int) {
+	np, ns := len(p), len(s)
+
+	if np > ns {
+		return
+	}
+
+	arrP, arrS := [26]int{}, [26]int{}
+
+	for _, char := range s[:np-1] {
+		arrS[char-'a']++
+	}
+
+	for _, char := range p {
+		arrP[char-'a']++
+	}
+
+	for i := np - 1; i < ns; i++ {
+		arrS[s[i]-'a']++
+
+		if arrS == arrP {
+			res = append(res, i-np+1)
+		}
+
+		arrS[s[i-np+1]-'a']--
 	}
 
 	return
