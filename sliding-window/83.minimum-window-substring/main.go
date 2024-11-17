@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -73,7 +72,6 @@ func minWindow2(s string, t string) string {
 		}
 
 		for need == have {
-			fmt.Println("need = ", need, have)
 			var newLen = right - left + 1
 
 			if resLen > newLen {
