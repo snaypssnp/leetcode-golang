@@ -9,6 +9,7 @@ func searchInsert(nums []int, target int) int {
 		mid := (start + end) / 2
 
 		if nums[mid] == target {
+
 			return mid
 		}
 
