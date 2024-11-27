@@ -63,49 +63,45 @@ func searchRange2(nums []int, target int) []int {
 }
 
 func searchRange3(nums []int, target int) []int {
-	findFirst := func(nums []int, target int) int {
-		var l = 0
-		var r = len(nums) - 1
+	return []int{findFirstPosition(nums, target), finsLastPosition(nums, target)}
+}
 
-		for l <= r {
-			mid := (l + r) / 2
+func findFirstPosition(nums []int, target int) int {
+	ans := -1
 
-			if nums[mid] == target {
-				if mid == 0 || nums[mid-1] != target {
-					return mid
-				}
-				r = mid - 1
-			} else if nums[mid] < target {
-				l = mid + 1
-			} else {
-				r = mid - 1
-			}
+	for left, right := 0, len(nums)-1; left <= right; {
+		mid := left + (right-left)/2
+
+		if nums[mid] < target {
+			left = mid + 1
+		} else if nums[mid] > target {
+			right = mid - 1
+		} else {
+			right = mid - 1
+
+			ans = mid
 		}
-		return -1
 	}
 
-	findLast := func(nums []int, target int) int {
-		var last = len(nums) - 1
-		var l = 0
-		var r = last
+	return ans
+}
 
-		for l <= r {
-			mid := (l + r) / 2
+func finsLastPosition(nums []int, target int) int {
+	ans := -1
 
-			if nums[mid] == target {
-				if mid == last || nums[mid+1] != target {
-					return mid
-				}
-				l = mid + 1
-			} else if nums[mid] < target {
-				l = mid + 1
-			} else {
-				r = mid - 1
-			}
+	for left, right := 0, len(nums)-1; left <= right; {
+		mid := left + (right-left)/2
+
+		if nums[mid] < target {
+			left = mid + 1
+		} else if nums[mid] > target {
+			right = mid - 1
+		} else {
+			left = mid + 1
+
+			ans = mid
 		}
-
-		return -1
 	}
 
-	return []int{findFirst(nums, target), findLast(nums, target)}
+	return ans
 }
