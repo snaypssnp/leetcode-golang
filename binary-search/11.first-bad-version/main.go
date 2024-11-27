@@ -18,19 +18,22 @@ func main() {
  */
 
 // Time: O(log n), Space: O(1)
-func firstBadVersion(n int) int {
-	l := 0
-	r := n
-	for l < r {
-		mid := (r + l) / 2
+func firstBadVersion(n int) (ans int) {
+	ans = -1
+
+	for left, right := 0, n; left <= right; {
+		mid := left + (right-left)/2
+
 		if isBadVersion(mid) {
-			r = mid
+			ans = mid
+
+			right = mid - 1
 		} else {
-			l = mid + 1
+			left = mid + 1
 		}
 	}
 
-	return l
+	return
 }
 
 func isBadVersion(n int) bool {
