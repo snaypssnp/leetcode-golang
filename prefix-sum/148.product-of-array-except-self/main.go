@@ -2,32 +2,17 @@ package main
 
 // https://leetcode.com/problems/product-of-array-except-self/
 func productExceptSelf(nums []int) []int {
-	var sum int
-	var n = len(nums)
-	var res = make([]int, n)
-	var hasZero bool
+	res := make([]int, len(nums))
+	res[0] = 1
 
-	for i := 0; i < n; i++ {
-		if nums[i] != 0 {
-			if sum == 0 {
-				sum = nums[i]
-			} else {
-				sum *= nums[i]
-			}
-
-		} else {
-			hasZero = true
-		}
-
+	for i := 1; i < len(nums); i++ {
+		res[i] = res[i-1] * nums[i-1]
 	}
 
-	for i := n - 1; i >= 0; i-- {
-		if nums[i] == 0 {
-			res[i] = sum
-		} else if hasZero != true {
-			res[i] = sum / nums[i]
-		}
+	for i, j := len(nums)-1, 1; i >= 0; i-- {
+		res[i] *= j
 
+		j *= nums[i]
 	}
 
 	return res
