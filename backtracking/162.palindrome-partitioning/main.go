@@ -1,5 +1,6 @@
 package main
 
+// https://leetcode.com/problems/palindrome-partitioning/description/
 func partition(s string) (res [][]string) {
 	var backtracking func(curr []string, first int)
 
