@@ -28,6 +28,7 @@ func (h *MyMinHeap) Pop() any {
 	return x
 }
 
+// https://leetcode.com/problems/last-stone-weight/description/
 func lastStoneWeight(stones []int) int {
 	minHead := MyMinHeap([]int{})
 	heap.Init(&minHead)
